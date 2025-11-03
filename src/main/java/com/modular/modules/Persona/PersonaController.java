@@ -1,7 +1,7 @@
 package com.modular.modules.Persona;
 
 import java.util.List;
-import java.util.Optional;
+
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,35 +23,44 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/personas")
-@Tag(name = "Hello Controller", description = "Operations related to greetings")
+@Tag(name = "Personas", description = "API para la gestión de personas")
 public class PersonaController {
 
     @Autowired
     private PersonaService personaService;
 
     @GetMapping
-    public List<Persona> getAllPersonas() {
-        return personaService.getAllPersonas();
+    @Operation(summary = "Obtener todas las personas")
+    public ResponseEntity<List<Persona>> getAllPersonas() {
+        List<Persona> personas = personaService.getAllPersonas();
+        return ResponseEntity.ok(personas);
     }
 
     @GetMapping("/{id}")
-    public Optional<Persona> getPersonaById(@PathVariable Long id) {
-        return personaService.getPersonaById(id);
+    @Operation(summary = "Obtener una persona por ID")
+    public ResponseEntity<Persona> getPersonaById(@PathVariable Long id) {
+        Persona persona = personaService.getPersonaById(id);
+        return ResponseEntity.ok(persona);
     }
 
     @PostMapping
+    @Operation(summary = "Crear una nueva persona")
     public ResponseEntity<Persona> createPersona(@Valid @RequestBody CreatePersonaDto dto) {
         Persona persona = personaService.createPersona(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(persona);
     }
 
     @PutMapping("/{id}")
-    public Persona updatePersona(@PathVariable Long id, @RequestBody Persona personaDetails) {
-        return personaService.updatePersona(id, personaDetails);
+    @Operation(summary = "Actualizar una persona existente")
+    public ResponseEntity<Persona> updatePersona(@PathVariable Long id, @RequestBody Persona personaDetails) {
+        Persona persona = personaService.updatePersona(id, personaDetails);
+        return ResponseEntity.ok(persona);
     }
 
     @DeleteMapping("/{id}")
-    public void deletePersona(@PathVariable Long id) {
+    @Operation(summary = "Eliminar una persona por ID")
+    public ResponseEntity<Void> deletePersona(@PathVariable Long id) {
         personaService.deletePersona(id);
+        return ResponseEntity.noContent().build();
     }
 }
