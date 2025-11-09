@@ -1,11 +1,12 @@
 package com.modular.modules.Persona.Dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
 
 
 public class CreatePersonaDto {
+    @NotNull
     private String nombre;
+    @NotNull
     private String apellido;
 
     public String getNombre() { return nombre; }

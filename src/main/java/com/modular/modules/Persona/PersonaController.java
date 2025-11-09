@@ -26,39 +26,37 @@ import jakarta.validation.Valid;
 @Tag(name = "Personas", description = "API para la gestión de personas")
 public class PersonaController {
 
-    @Autowired
-    private PersonaService personaService;
+    final private PersonaService personaService;
+
+    public PersonaController(PersonaService personaService) {
+        this.personaService = personaService;
+    }
 
     @GetMapping
-    @Operation(summary = "Obtener todas las personas")
     public ResponseEntity<List<Persona>> getAllPersonas() {
         List<Persona> personas = personaService.getAllPersonas();
         return ResponseEntity.ok(personas);
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Obtener una persona por ID")
     public ResponseEntity<Persona> getPersonaById(@PathVariable Long id) {
         Persona persona = personaService.getPersonaById(id);
         return ResponseEntity.ok(persona);
     }
 
     @PostMapping
-    @Operation(summary = "Crear una nueva persona")
     public ResponseEntity<Persona> createPersona(@Valid @RequestBody CreatePersonaDto dto) {
         Persona persona = personaService.createPersona(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(persona);
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Actualizar una persona existente")
     public ResponseEntity<Persona> updatePersona(@PathVariable Long id, @RequestBody Persona personaDetails) {
         Persona persona = personaService.updatePersona(id, personaDetails);
         return ResponseEntity.ok(persona);
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Eliminar una persona por ID")
     public ResponseEntity<Void> deletePersona(@PathVariable Long id) {
         personaService.deletePersona(id);
         return ResponseEntity.noContent().build();
