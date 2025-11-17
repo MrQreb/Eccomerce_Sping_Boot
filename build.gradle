@@ -29,7 +29,6 @@ dependencies {
     implementation 'org.springframework.modulith:spring-modulith-starter-core'
     implementation 'org.springframework.modulith:spring-modulith-starter-jpa'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
     runtimeOnly 'org.xerial:sqlite-jdbc:3.42.0.1'
     implementation 'org.hibernate.orm:hibernate-community-dialects'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
