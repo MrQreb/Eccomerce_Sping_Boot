@@ -4,12 +4,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 
+import com.modular.modules.Categoria.CategoriaModule;
 import com.modular.modules.RolUsuario.RolUsuarioModule;
 import com.modular.modules.Usuario.UsuarioModule;
 
 
 @SpringBootApplication()
-@Import({ UsuarioModule.class, RolUsuarioModule.class }) 
+@Import({ UsuarioModule.class, RolUsuarioModule.class, CategoriaModule.class }) 
  
 public class ModularApplication {
 

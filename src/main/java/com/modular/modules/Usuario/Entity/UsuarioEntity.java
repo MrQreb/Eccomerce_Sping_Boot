@@ -1,10 +1,14 @@
 package com.modular.modules.Usuario.Entity;
 
+import com.modular.modules.RolUsuario.Entity.RolUsuarioEntity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 
@@ -28,6 +32,11 @@ public class UsuarioEntity {
 
     @Column(name = "contrasena")
     private String contrasena;
+
+    @ManyToOne()
+    @JoinColumn(name="rol_id")
+    private RolUsuarioEntity rol;
+    
 
     public Long getId() {
         return id;
@@ -67,5 +76,13 @@ public class UsuarioEntity {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
+    }
+
+    public RolUsuarioEntity getRol() {
+        return rol;
+    }
+
+    public void setRol(RolUsuarioEntity rol) {
+        this.rol = rol;
     }
 }

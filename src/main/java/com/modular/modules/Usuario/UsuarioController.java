@@ -1,13 +1,12 @@
 package com.modular.modules.Usuario;
 
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.modular.modules.Usuario.Entity.UsuarioEntity;
 
@@ -28,10 +27,17 @@ public class UsuarioController {
     }
 
     @PostMapping("/crear")
-    public String createUsuario(UsuarioEntity usuario) {
-        usuarioService.createUsuario(usuario);
-        return "redirect:/usuario/formulario?exito";
+    public String createUsuario(UsuarioEntity usuario, RedirectAttributes redirectAttributes) {
+        try {
+            usuarioService.createUsuarioNormal(usuario);
+            redirectAttributes.addFlashAttribute("exito", "¡Usuario registrado con éxito!");
+            return "redirect:/usuario/formulario";
+        } catch (RuntimeException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return "redirect:/usuario/formulario";
+        }
     }
+    
 
     @GetMapping("/login")
     public String mostrarLoginFormulario() {
@@ -52,10 +58,5 @@ public class UsuarioController {
             model.addAttribute("error", e.getMessage());
             return "login";
         }
-    }
-
-    @PostMapping("/obtener")
-    public List<UsuarioEntity> getUsuarios() {
-        return usuarioService.getUsuarios();
     }
 }
