@@ -26,7 +26,15 @@ public class UsuarioService {
         return savedEntity;
     }
 
-    public List<UsuarioEntity> getUsuarios(){
+    public List<UsuarioEntity> getUsuarios() {
         return usuarioRepository.findAll();
+    }
+
+    public UsuarioEntity login(String usuario, String contrasena) {
+        UsuarioEntity usuarioEntity = usuarioRepository.findByUsuarioAndContrasena(usuario, contrasena);
+        if (usuarioEntity == null) {
+            throw new RuntimeException("Usuario o contraseña incorrectos");
+        }
+        return usuarioEntity;
     }
 }

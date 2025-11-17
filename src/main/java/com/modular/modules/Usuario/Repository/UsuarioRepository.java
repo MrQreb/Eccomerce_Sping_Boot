@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.modular.modules.Usuario.Entity.UsuarioEntity;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long>{
-
-};
+public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {
+    UsuarioEntity findByUsuarioAndContrasena(String usuario, String contrasena);
+}
