@@ -11,7 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.modular.modules.Usuario.Entity.UsuarioEntity;
 
 @Controller
-@RequestMapping("usuario")
+@RequestMapping()
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
@@ -23,7 +23,7 @@ public class UsuarioController {
     @GetMapping("/formulario")
     public String mostrarFormulario(Model model) {
         model.addAttribute("usuario", new UsuarioEntity());
-        return "formularioUsuario";
+        return "usuario/crear-cuenta-form";
     }
 
     @PostMapping("/crear")
@@ -31,17 +31,17 @@ public class UsuarioController {
         try {
             usuarioService.createUsuarioNormal(usuario);
             redirectAttributes.addFlashAttribute("exito", "¡Usuario registrado con éxito!");
-            return "redirect:/usuario/formulario";
+            return "redirect:/formulario";
         } catch (RuntimeException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
-            return "redirect:/usuario/formulario";
+            return "redirect:/formulario";
         }
     }
     
 
-    @GetMapping("/login")
+    @GetMapping("/")
     public String mostrarLoginFormulario() {
-        return "login";
+        return "usuario/login";
     }
 
     @GetMapping("/home")
@@ -49,11 +49,11 @@ public class UsuarioController {
         return "home";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/")
     public String login(@RequestParam String usuario, @RequestParam String contrasena, Model model) {
         try {
             usuarioService.login(usuario, contrasena);
-            return "redirect:/usuario/home";
+            return "redirect:/home";
         } catch (RuntimeException e) {
             model.addAttribute("error", e.getMessage());
             return "login";

@@ -4,6 +4,9 @@ import org.springframework.stereotype.Service;
 
 import com.modular.modules.Categoria.Entity.CategoriaEntity;
 import com.modular.modules.Categoria.Repository.CategoriaRepository;
+
+import java.util.List;
+
 @Service
 public class CategoriaService {
     private final CategoriaRepository categoriaRepository;
@@ -12,11 +15,14 @@ public class CategoriaService {
         this.categoriaRepository = categoriaRepository;
     };
 
-    public void createCategoria(CategoriaEntity categoria){
+    public void createCategoria(String nombre){
         CategoriaEntity nuevaCategoria = new CategoriaEntity();
-        nuevaCategoria.setNombre(nuevaCategoria.getNombre());
+        nuevaCategoria.setNombre(nombre);
         categoriaRepository.save(nuevaCategoria);
-        System.out.println("CategorIA creada");
-        System.out.println("Nombre" + nuevaCategoria.getNombre());
+        System.out.println("Categoria creada");
+    }
+
+    public List<CategoriaEntity> getCategorias(){
+     return  categoriaRepository.findAll();
     }
 }
