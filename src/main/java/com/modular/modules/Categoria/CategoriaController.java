@@ -19,9 +19,9 @@ public class CategoriaController {
     }
 
     @GetMapping("/crear")
-    public String mostrarCrear(Model model){
+    public String mostrarCrear(Model model) {
         model.addAttribute("categoriaCategoria", new CategoriaEntity());
-        return "categoria/crearCategoria";
+        return "categoria/crear-categoria-form";
     }
 
     @PostMapping("/crear")
