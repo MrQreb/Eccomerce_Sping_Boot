@@ -1,7 +1,10 @@
 package com.modular.modules.Producto.Entity;
 
 import com.modular.modules.Categoria.Entity.CategoriaEntity;
+import com.modular.modules.MovimientoInventario.Entity.MovimientoInventarioEntitiy;
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table( name = "Producto")
@@ -19,7 +22,7 @@ public class ProductoEntity {
     private float precio;
 
     @Column
-    private float stock;
+    private int stock;
 
     @Column
     private boolean estaEliminado = false;
@@ -30,6 +33,9 @@ public class ProductoEntity {
 
     @Column
     private float minimoStock = 5;
+
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MovimientoInventarioEntitiy> movimientosInventario = new ArrayList<>();
 
     public void setCategoria(CategoriaEntity categoria) {
         this.categoria = categoria;
@@ -59,11 +65,11 @@ public class ProductoEntity {
         this.nombre = nombre;
     }
 
-    public float getStock() {
+    public int getStock() {
         return stock;
     }
 
-    public void setStock(float stock) {
+    public void setStock(int stock) {
         this.stock = stock;
     }
 
@@ -89,5 +95,13 @@ public class ProductoEntity {
 
     public void setEstaEliminado(boolean estaEliminado) {
         this.estaEliminado = estaEliminado;
+    }
+
+    public List<MovimientoInventarioEntitiy> getMovimientosInventario() {
+        return movimientosInventario;
+    }
+
+    public void setMovimientosInventario(List<MovimientoInventarioEntitiy> movimientosInventario) {
+        this.movimientosInventario = movimientosInventario;
     }
 }

@@ -1,5 +1,6 @@
 package com.modular.modular;
 
+import com.modular.modules.MovimientoInventario.MovimientoInventarioModule;
 import com.modular.modules.Producto.ProductoModule;
 import com.modular.modules.Provedor.ProvedorModule;
 import org.springframework.boot.SpringApplication;
@@ -12,7 +13,13 @@ import com.modular.modules.Usuario.UsuarioModule;
 
 
 @SpringBootApplication()
-@Import({ UsuarioModule.class, RolUsuarioModule.class, CategoriaModule.class, ProductoModule.class, ProvedorModule.class})
+@Import({
+        UsuarioModule.class,
+        RolUsuarioModule.class,
+        CategoriaModule.class,
+        ProductoModule.class,
+        ProvedorModule.class,
+        MovimientoInventarioModule.class})
 
 public class ModularApplication {
 
