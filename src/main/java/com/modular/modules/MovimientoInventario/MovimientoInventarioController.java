@@ -20,15 +20,17 @@ public class MovimientoInventarioController {
     private final ProductoRepository productoRepository;
     private final ProvedorRepository provedorRepository;
 
-    public MovimientoInventarioController(MovimientoInventarioService movimientoInventarioService,
-                                          ProductoRepository productoRepository,
-                                          ProvedorRepository provedorRepository) {
+    public MovimientoInventarioController(
+            MovimientoInventarioService movimientoInventarioService,
+            ProductoRepository productoRepository,
+            ProvedorRepository provedorRepository
+    ) {
         this.movimientoInventarioService = movimientoInventarioService;
         this.productoRepository = productoRepository;
         this.provedorRepository = provedorRepository;
     }
 
-    @GetMapping("/movimiento/form")
+    @GetMapping("/movimiento/sutir")
     public String showMovimientoForm(Model model) {
         List<ProductoEntity> productos = productoRepository.findAll();
         List<ProvedorEntity> provedores = provedorRepository.findAll();
@@ -56,6 +58,6 @@ public class MovimientoInventarioController {
         movimiento.setProvedor(provedor);
 
         movimientoInventarioService.guardarMovimiento(movimiento);
-        return "redirect:/movimiento/form";
+        return "redirect:/movimiento/sutir";
     }
 }

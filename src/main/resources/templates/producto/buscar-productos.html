@@ -7,6 +7,19 @@
 </head>
 <body class="bg-dark text-white">
 
+<style>
+    .floating-cart-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 1050;
+    }
+</style>
+
+<a href="/carrito" class="btn btn-warning btn-lg floating-cart-btn">
+    Ver carrito
+</a>
+
 <div class="container mt-5">
 
     <h2 class="mb-4">Buscar Productos</h2>
@@ -41,19 +54,31 @@
         </div>
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" th:if="${!#lists.isEmpty(productos)}">
+
             <div class="col" th:each="prod : ${productos}">
                 <div class="card h-100 shadow-sm">
+
                     <div class="card-body">
                         <h5 class="card-title" th:text="${prod.nombre}">Nombre</h5>
                         <p class="card-text mb-1"><strong>Precio:</strong> <span th:text="${prod.precio}">0.00</span></p>
                         <p class="card-text"><strong>Stock:</strong> <span th:text="${prod.stock}">0</span></p>
                         <p class="card-text"><strong>Descripcion:</strong> <span th:text="${prod.descripcion}"></span></p>
                     </div>
-                    <div class="card-footer bg-white">
-                        <!-- espacio para acciones  -->
-                    </div>
+
+                    <!-- Boton de agregar al carrtito-->
+                    <section class="card-footer bg-white">
+                        <div class="d-flex align-items-center">
+                            <input type="number" min="1" class="form-control me-2" style="width: 80px;" placeholder="Cantidad">
+                            <button class="btn btn-success"  >Agregar al carrito</button>
+                        </div>
+                    </section>
+
+
                 </div>
             </div>
+
+
+
         </div>
     </div>
 
