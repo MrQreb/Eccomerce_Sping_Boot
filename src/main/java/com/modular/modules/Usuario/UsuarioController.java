@@ -78,7 +78,7 @@ public class UsuarioController {
 
             session.setAttribute("rolUsuario", rol);
 
-            //Mandar diferetentes paneles en base el rol
+            //Mandar diferentes paneles en base al rol
             if ("usuario".equalsIgnoreCase(rol)) {
                 return "redirect:/usuario/home";
             }
