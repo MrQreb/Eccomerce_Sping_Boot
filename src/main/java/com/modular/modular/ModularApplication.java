@@ -19,7 +19,8 @@ import com.modular.modules.Usuario.UsuarioModule;
         CategoriaModule.class,
         ProductoModule.class,
         ProvedorModule.class,
-        MovimientoInventarioModule.class})
+        MovimientoInventarioModule.class
+})
 
 public class ModularApplication {
 

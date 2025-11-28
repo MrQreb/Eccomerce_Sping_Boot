@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Small custom adjustments */
+        .sidebar { min-height: 100vh; }
+        .card-text small { display: block; }
+        .brand { font-weight: 700; letter-spacing: .5px; }
+        @media (max-width: 767.98px) {
+          .sidebar { position: static; min-height: auto; }
+        }
+    </style>
+</head>
+<body class="bg-dark text-white">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+</nav>
+
+<div class="container-fluid">
+    <div class="row g-0">
+
+        <!-- Sidebar -->
+        <aside class="col-12 col-md-3 col-lg-2 bg-white sidebar border-end p-3 bg-dark text-white" >
+            <div class="d-flex align-items-center mb-4">
+                <div>
+                    <div class="h6 mb-0">Admin Panel</div>
+                </div>
+            </div>
+
+            <nav class="nav nav-pills flex-column">
+                <a class="nav-link" th:href="@{/usuario/admin/home}">Dashboard</a>
+                <a class="nav-link active" aria-current="page" th:href="@{/producto}">Productos</a>
+                <a class="nav-link" th:href="@{/categoria}">Categorías</a>
+                <a class="nav-link" th:href="@{/usuario}">Usuarios</a>
+                <a class="nav-link" th:href="@{/pedidos}">Pedidos</a>
+                <a class="nav-link" th:href="@{/usuario/admin}">Crear admin</a>                <a class="nav-link" th:href="@{/producto/form}">Añadir Producto</a>
+                <a class="nav-link" th:href="@{/categoria/crear}">Añadir Categoria</a>
+                <a class="nav-link" th:href="@{/movimiento/sutir}">Sutir inventario</a>
+                <a class="nav-link text-danger mt-2" th:href="@{/}">Cerrar sesión</a>
+            </nav>
+
+            <hr>
+
+        </aside>
+
+        <!-- Main content -->
+        <main class="col-12 col-md-9 col-lg-10 p-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                    <h2 class="mb-0">Buscar Productos</h2>
+                    <small class="text-muted">Resultados de la búsqueda</small>
+                </div>
+                <div>
+                    <a class="btn btn-outline-primary btn-sm" th:href="@{/producto/form}">Nuevo Producto</a>
+                </div>
+            </div>
+
+
+            <div class="d-flex align-items-center mb-4">
+                <div>
+                    <div class="h6 mb-0">Admin Panel</div>
+                    <small>ID Usuario: <span th:text="${idUsuario}"></span></small>
+                    <small>Rol: <span th:text="${rolUsuario}"></span></small>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
