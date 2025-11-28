@@ -69,4 +69,19 @@ public class UsuarioService {
         }
         return usuarioEntity;
     }
+
+    public UsuarioEntity createUsuarioAdmin(UsuarioEntity usuario) {
+        if (countExist(usuario.getCorreo())) {
+            throw new RuntimeException("El correo ya está registrado: " + usuario.getCorreo());
+        }
+
+        UsuarioEntity usuarioEntity = new UsuarioEntity();
+        usuarioEntity.setNombre(usuario.getNombre());
+        usuarioEntity.setUsuario(usuario.getUsuario());
+        usuarioEntity.setCorreo(usuario.getCorreo());
+        usuarioEntity.setContrasena(usuario.getContrasena());
+        usuarioEntity.setRol(rolService.getAdminRol());
+        UsuarioEntity savedEntity = usuarioRepository.save(usuarioEntity);
+        return savedEntity;
+    }
 }

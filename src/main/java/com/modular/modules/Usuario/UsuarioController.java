@@ -1,5 +1,6 @@
 package com.modular.modules.Usuario;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.modular.modules.Usuario.Entity.UsuarioEntity;
 
 @Controller
-@RequestMapping()
+@RequestMapping("/usuario")
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
@@ -20,6 +21,8 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
+
+    //Crear usuario normal
     @GetMapping("/formulario")
     public String mostrarFormulario(Model model) {
         model.addAttribute("usuario", new UsuarioEntity());
@@ -31,32 +34,63 @@ public class UsuarioController {
         try {
             usuarioService.createUsuarioNormal(usuario);
             redirectAttributes.addFlashAttribute("exito", "¡Usuario registrado con éxito!");
-            return "redirect:/formulario";
+            return "redirect:/usuario/login";
         } catch (RuntimeException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
-            return "redirect:/formulario";
+            return "redirect:/usuario/formulario";
         }
     }
-    
 
-    @GetMapping("/")
+    //Crear usuario admin
+    @GetMapping("/admin")
+    public String mostrarFormularioAdmin(Model model) {
+        model.addAttribute("usuario", new UsuarioEntity());
+        return "admin/crear-cuenta-form";
+    }
+
+    @PostMapping("/admin/crear")
+    public String createUsuarioAdmin(UsuarioEntity usuario, RedirectAttributes redirectAttributes) {
+        try {
+            usuarioService.createUsuarioAdmin(usuario);
+            redirectAttributes.addFlashAttribute("exito", "¡Usuario registrado con éxito!");
+            return "redirect:/admin/home";
+        } catch (RuntimeException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return "redirect:/usuario/admin";
+        }
+    }
+
+    @GetMapping("/login")
     public String mostrarLoginFormulario() {
         return "usuario/login";
     }
 
     @GetMapping("/home")
     public String mostrarHome() {
-        return "home";
+        return "usuario/home";
     }
 
-    @PostMapping("/")
-    public String login(@RequestParam String usuario, @RequestParam String contrasena, Model model) {
+    @PostMapping("/login")
+    public String login(@RequestParam String usuario, @RequestParam String contrasena, Model model, HttpSession session) {
         try {
-            usuarioService.login(usuario, contrasena);
-            return "redirect:/home";
+            UsuarioEntity usuarioEntity = usuarioService.login(usuario, contrasena);
+            String rol = usuarioEntity.getRol().getNombre();
+
+            session.setAttribute("rolUsuario", rol);
+
+            //Mandar diferentes paneles en base al rol
+            if ("usuario".equalsIgnoreCase(rol)) {
+                return "redirect:/usuario/home";
+            }
+            if ("admin".equalsIgnoreCase(rol)) {
+                return "redirect:/admin/home";
+            }
+
+            return  "redirect:/usuario/login";
         } catch (RuntimeException e) {
             model.addAttribute("error", e.getMessage());
-            return "login";
+            return "usuario/login";
         }
     }
+
 }
