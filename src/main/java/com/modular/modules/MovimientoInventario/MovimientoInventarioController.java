@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class MovimientoInventarioController {
@@ -61,5 +62,11 @@ public class MovimientoInventarioController {
         return "redirect:/movimiento/sutir";
     }
 
+    @GetMapping("/movimiento/ver")
+    public String listMovimientos(Model model) {
+        List<MovimientoInventarioEntitiy> movimientos = movimientoInventarioService.findAll();
+        model.addAttribute("movimientos", movimientos);
+        return "movimiento/ver-movimiento-form";
+    }
 
 }

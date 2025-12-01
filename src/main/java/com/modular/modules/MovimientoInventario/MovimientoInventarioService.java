@@ -3,11 +3,14 @@ package com.modular.modules.MovimientoInventario;
 import com.modular.modules.MovimientoInventario.Entity.MovimientoInventarioEntitiy;
 import com.modular.modules.MovimientoInventario.Repository.MovientoInventarioRepository;
 import com.modular.modules.Producto.Entity.ProductoEntity;
+import com.modular.modules.Producto.MovimientoDto;
 import com.modular.modules.Producto.Repository.ProductoRepository;
 import com.modular.modules.Provedor.Entity.ProvedorEntity;
 import com.modular.modules.Provedor.Repository.ProvedorRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -63,4 +66,22 @@ public class MovimientoInventarioService {
         provedorRepository.save(provedor);
         return saved;
     }
+
+    public List<MovimientoInventarioEntitiy> findAll(){
+        return  movimientoInventarioRepository.findAll();
+    }
+
+    public List<MovimientoDto> mapMovimientosToDto(List<MovimientoInventarioEntitiy> movimientos) {
+        return movimientos.stream()
+                .map(m -> new MovimientoDto(
+                        m.getProducto() != null ? m.getProducto().getNombre() : "N/A",
+                        m.getProvedor() != null ? m.getProvedor().getNombre() : "N/A",
+                        m.getCantidadAnadida(),
+                        m.getStockAnterior(),
+                        m.getStockNuevo(),
+                        m.getTotalMovimiento()
+                ))
+                .collect(Collectors.toList());
+    }
+
 }

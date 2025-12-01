@@ -1,28 +1,28 @@
 package com.modular.modules.MovimientoInventario.Entity;
 
+import com.modular.modules.Categoria.Entity.CategoriaEntity;
 import com.modular.modules.Producto.Entity.ProductoEntity;
 import com.modular.modules.Provedor.Entity.ProvedorEntity;
 import jakarta.persistence.*;
-
 @Entity
 @Table(name = "MovimientoInventario")
 public class MovimientoInventarioEntitiy {
 
     @Id
-    @GeneratedValue()
-    Long id;
+    @GeneratedValue
+    private Long id;
 
-    @Column
-    int stockAnterior;
+    @Column(nullable = true)
+    private Integer stockAnterior;
 
-    @Column
-    int stockNuevo;
+    @Column(nullable = true)
+    private Integer stockNuevo;
 
-    @Column
-    int cantidadAnadida;
+    @Column(nullable = true)
+    private Integer cantidadAnadida;
 
-    @Column
-    float totalMovimiento;
+    @Column(nullable = true)
+    private Float totalMovimiento;
 
     @ManyToOne
     @JoinColumn(name = "provedor_id", nullable = false)
@@ -32,35 +32,47 @@ public class MovimientoInventarioEntitiy {
     @JoinColumn(name = "producto_id", nullable = false)
     private ProductoEntity producto;
 
-    public float getTotalMovimiento() {
+    public MovimientoInventarioEntitiy() {
+        // optional defaults or leave fields null
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Float getTotalMovimiento() {
         return totalMovimiento;
     }
 
-    public void setTotalMovimiento(float totalMovimiento) {
+    public void setTotalMovimiento(Float totalMovimiento) {
         this.totalMovimiento = totalMovimiento;
     }
 
-    public int getStockAnterior() {
+    public Integer getStockAnterior() {
         return stockAnterior;
     }
 
-    public void setStockAnterior(int stockAnterior) {
+    public void setStockAnterior(Integer stockAnterior) {
         this.stockAnterior = stockAnterior;
     }
 
-    public int getStockNuevo() {
+    public Integer getStockNuevo() {
         return stockNuevo;
     }
 
-    public void setStockNuevo(int stockNuevo) {
+    public void setStockNuevo(Integer stockNuevo) {
         this.stockNuevo = stockNuevo;
     }
 
-    public int getCantidadAnadida() {
+    public Integer getCantidadAnadida() {
         return cantidadAnadida;
     }
 
-    public void setCantidadAnadida(int cantidadAnadida) {
+    public void setCantidadAnadida(Integer cantidadAnadida) {
         this.cantidadAnadida = cantidadAnadida;
     }
 
