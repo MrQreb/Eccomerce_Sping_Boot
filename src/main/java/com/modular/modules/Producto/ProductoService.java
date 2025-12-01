@@ -36,11 +36,10 @@ public class ProductoService {
 
 
     public List<ProductoEntity> getProductos(Long categoriaId) {
-
         if (categoriaId == null || categoriaId == 0) {
-            return productoRepository.findAll();
+            return productoRepository.findByEstaEliminadoFalse();
         }
-        return productoRepository.findByCategoriaId(categoriaId);
+        return productoRepository.findByCategoriaIdAndEstaEliminadoFalse(categoriaId);
     }
 
     public Optional<ProductoEntity> getProductoById(long id) {

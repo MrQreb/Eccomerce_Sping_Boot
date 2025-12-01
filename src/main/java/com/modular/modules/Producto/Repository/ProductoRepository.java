@@ -9,4 +9,8 @@ public interface ProductoRepository extends JpaRepository<ProductoEntity, Long> 
     List<ProductoEntity> findByCategoriaId(Long categoriaId);
     List<ProductoEntity> findByCategoriaNombre(String nombre);
 
+    List<ProductoEntity> findByEstaEliminadoFalse();
+    List<ProductoEntity> findByCategoriaIdAndEstaEliminadoFalse(Long categoriaId);
+    List<ProductoEntity> findByCategoriaNombreAndEstaEliminadoFalse(String nombre);
 }
+

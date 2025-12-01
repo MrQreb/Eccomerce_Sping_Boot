@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Categorías</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-dark text-white">
+
+<!-- Barra de navegacion -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="/usuario/admin/home">AdminApp</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/usuario/admin/home">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/usuario/admin/home">Panel Admin</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/producto/buscar-admin">Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/categoria/crear">Categorías</a>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link text-danger" href="/logout">Cerrar Sesión</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Categorías</h2>
+        <a th:href="@{/categoria/crear}" class="btn btn-primary">Crear categoría</a>
+    </div>
+
+    <div th:if="${#lists.isEmpty(categorias)}" class="alert alert-secondary">
+        No hay categorías para mostrar.
+    </div>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4" th:if="${!#lists.isEmpty(categorias)}">
+        <div class="col" th:each="cat : ${categorias}">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${cat.nombre}">Nombre</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

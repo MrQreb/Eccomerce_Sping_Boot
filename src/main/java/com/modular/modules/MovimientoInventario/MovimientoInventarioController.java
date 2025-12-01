@@ -60,4 +60,6 @@ public class MovimientoInventarioController {
         movimientoInventarioService.guardarMovimiento(movimiento);
         return "redirect:/movimiento/sutir";
     }
+
+
 }

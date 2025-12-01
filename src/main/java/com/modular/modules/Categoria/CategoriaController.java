@@ -8,13 +8,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("categoria")
 public class CategoriaController {
 
     private final CategoriaService categoriaService;
 
-    public CategoriaController(CategoriaService categoriaService){
+    public CategoriaController(CategoriaService categoriaService) {
         this.categoriaService = categoriaService;
     }
 
@@ -33,6 +35,14 @@ public class CategoriaController {
             model.addAttribute("error", "Hubo un error al crear la categoría");
             return "categoria/crear-categoria-form";
         }
+    }
+
+
+    @GetMapping("/ver")
+    public String listarCategorias(Model model) {
+        List<CategoriaEntity> categorias = categoriaService.getCategorias();
+        model.addAttribute("categorias", categorias);
+        return "categoria/ver-categoria-form";
     }
 
 

@@ -22,6 +22,10 @@ public class CategoriaService {
         System.out.println("Categoria creada");
     }
 
+    public List<CategoriaEntity> getCategoria(){
+        return categoriaRepository.findAll();
+    }
+
     public List<CategoriaEntity> getCategorias(){
      return  categoriaRepository.findAll();
     }

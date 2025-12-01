@@ -63,6 +63,24 @@ public class ProductoController {
         return "producto/editar-producto-form";
     }
 
+
+    // Metodos para admin
+
+    @GetMapping("/producto/buscar-admin")
+    public String buscarProductosAdmin(
+            @RequestParam(required = false) Long categoriaId,
+            Model model
+    ){
+        List<ProductoEntity> productos = productoService.getProductos(categoriaId);
+        List<CategoriaEntity> categorias = categoriaService.getCategorias();
+
+        model.addAttribute("productos", productos);
+        model.addAttribute("categorias", categorias);
+        model.addAttribute("categoriaId", categoriaId);
+        return "producto/buscar-productos-admin";
+    }
+
+
     @PostMapping("/producto/update")
     public String updateProducto(
             @RequestParam("id") long id,
@@ -70,7 +88,13 @@ public class ProductoController {
             ProductoEntity producto
     ) {
         productoService.updateProducto(id, producto, categoriaId);
-        return "redirect:/producto/buscar";
+        return "redirect:/producto/buscar-admin";
+    }
+
+    @PostMapping("/producto/delete")
+    public String deleteProducto(@RequestParam("id") long id) {
+        productoService.deleteProducto(id);
+        return "redirect:/producto/buscar-admin";
     }
 
 }
