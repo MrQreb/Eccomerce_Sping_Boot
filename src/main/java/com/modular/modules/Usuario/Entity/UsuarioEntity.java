@@ -1,16 +1,13 @@
 package com.modular.modules.Usuario.Entity;
 
+import com.modular.modules.Direccion.Entity.DireccionEntity;
 import com.modular.modules.RolUsuario.Entity.RolUsuarioEntity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "usuario") 
@@ -85,4 +82,30 @@ public class UsuarioEntity {
     public void setRol(RolUsuarioEntity rol) {
         this.rol = rol;
     }
+
+
+
+    @OneToMany(mappedBy = "usuario", cascade = jakarta.persistence.CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<DireccionEntity> direcciones = new ArrayList<>();
+
+    public List<DireccionEntity> getDirecciones() {
+        return direcciones;
+    }
+
+
+    public void setDirecciones(List<DireccionEntity> direcciones) {
+        this.direcciones = direcciones;
+    }
+
+
+    public void addDireccion(DireccionEntity direccion) {
+        direcciones.add(direccion);
+        direccion.setUsuario(this);
+    }
+
+    public void removeDireccion(DireccionEntity direccion) {
+        direcciones.remove(direccion);
+        direccion.setUsuario(null);
+    }
+
 }
