@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editar Producto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+
+<style>
+    .floating-cart-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 1050;
+    }
+</style>
+
+<a href="/producto/buscar" class="btn btn-warning btn-lg floating-cart-btn">
+    Volver a productos
+</a>
+
+<body class="container mt-5 bg-dark text-white">
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h2 class="text-center mb-0">Productos en el Carrito</h2>
+        </div>
+        <div class="card-body">
+            <div th:if="${#lists.isEmpty(productos)}" class="alert alert-warning text-center">
+                <strong>No hay productos en el carrito.</strong>
+                <a th:href="@{/producto/buscar}" class="alert-link">¡Agrega productos aquí!</a>
+            </div>
+
+            <div th:if="${!#lists.isEmpty(productos)}">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead class="table-dark text-center">
+                        <tr>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio Unitario</th>
+                            <th>Subtotal</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="producto : ${productos}">
+                            <td th:text="${producto.producto.nombre}"></td>
+                            <td th:text="${producto.cantidad}" class="text-center"></td>
+                            <td th:text="${producto.producto.precio}" class="text-end"></td>
+                            <td th:text="${producto.cantidad * producto.producto.precio}" class="text-end"></td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-end"><strong>Total:</strong></td>
+                            <td th:text="${total}" class="text-end"></td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div class="text-center mt-4">
+                    <form th:action="@{/carrito/eliminar-carrito}" method="post">
+                        <input type="hidden" name="_method" value="delete" />
+                        <button type="submit" class="btn btn-danger btn-lg">
+                            <i class="bi bi-trash"></i> Eliminar carrito
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

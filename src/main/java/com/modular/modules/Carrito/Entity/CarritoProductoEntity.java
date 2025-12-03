@@ -53,4 +53,14 @@ public class CarritoProductoEntity {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
+
+    // Override toString() for meaningful logging
+    @Override
+    public String toString() {
+        return "CarritoProductoEntity{" +
+                "id=" + id +
+                ", producto=" + (producto != null ? producto.getNombre() : "null") +
+                ", cantidad=" + cantidad +
+                '}';
+    }
 }

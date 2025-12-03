@@ -16,7 +16,7 @@
     }
 </style>
 
-<a href="/carrito" class="btn btn-warning btn-lg floating-cart-btn">
+<a href="/carrito/ver-carrito" class="btn btn-warning btn-lg floating-cart-btn">
     Ver carrito
 </a>
 
@@ -67,11 +67,16 @@
 
                     <!-- Boton de agregar al carrtito-->
                     <section class="card-footer bg-white">
-                        <div class="d-flex align-items-center">
-                            <input type="number" min="1" class="form-control me-2" style="width: 80px;" placeholder="Cantidad">
-                            <button class="btn btn-success"  >Agregar al carrito</button>
-                        </div>
+                        <form th:action="@{/carrito/agregar}" method="post" class="d-flex align-items-center">
+                            <input type="hidden" name="productoId" th:value="${prod.id}">
+                            <input type="number" name="cantidad" min="1" class="form-control me-2" style="width: 80px;" placeholder="Cantidad" required>
+                            <button type="submit" class="btn btn-success">Agregar al carrito</button>
+                        </form>
                     </section>
+
+                    <div th:if="${mensaje}" class="alert alert-success" role="alert">
+                        <span th:text="${mensaje}"></span>
+                    </div>
 
 
                 </div>
