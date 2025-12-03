@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
-@ComponentScan(basePackages = "com.modular.modules.Categoria") 
+@ComponentScan(basePackages = "com.modular.modules.Categoria")
 @EnableJpaRepositories(basePackages = "com.modular.modules.Categoria.Repository")
 @EntityScan(basePackages = "com.modular.modules.Categoria.Entity")
 public class CategoriaModule {
