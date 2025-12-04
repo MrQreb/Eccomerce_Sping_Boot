@@ -61,6 +61,8 @@ public class CarritoService {
     public void deleteCartByUsuarioId(Long usuarioId) {
         CarritoEntity carrito = carritoRepository.findByUsuarioId(usuarioId)
                 .orElseThrow(() -> new RuntimeException("Carrito no encontrado para el usuario"));
+
+        carrito.getProductos().clear();
         carritoRepository.delete(carrito);
     }
 
