@@ -92,12 +92,11 @@ public class UsuarioController {
             UsuarioEntity usuarioEntity = usuarioService.login(usuario, contrasena);
             String rol = usuarioEntity.getRol().getNombre();
 
-            //Valores de la sesion
-
+            session.setAttribute("usuario", usuarioEntity);
             session.setAttribute("rolUsuario", rol);
             session.setAttribute("idUsuario", usuarioEntity.getId());
 
-            //Mandar diferetentes paneles en base el rol
+            // Redirect based on the role
             if ("usuario".equalsIgnoreCase(rol)) {
                 return "redirect:/usuario/home";
             }
@@ -105,7 +104,7 @@ public class UsuarioController {
                 return "redirect:/usuario/admin/home";
             }
 
-            return  "redirect:usuario/login";
+            return "redirect:/usuario/login";
         } catch (RuntimeException e) {
             model.addAttribute("error", e.getMessage());
             return "usuario/login";

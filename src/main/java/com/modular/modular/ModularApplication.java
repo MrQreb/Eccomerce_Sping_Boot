@@ -4,6 +4,7 @@ import com.modular.modules.Carrito.CarritoModule;
 import com.modular.modules.Direccion.DireccionModule;
 import com.modular.modules.EstatusCompra.EstatusCompraModule;
 import com.modular.modules.MovimientoInventario.MovimientoInventarioModule;
+import com.modular.modules.Pedido.PedidoModule;
 import com.modular.modules.Producto.ProductoModule;
 import com.modular.modules.Provedor.ProvedorModule;
 import com.modular.modules.TipoPago.TipoPagoModule;
@@ -27,7 +28,8 @@ import com.modular.modules.Usuario.UsuarioModule;
         DireccionModule.class,
         CarritoModule.class,
         TipoPagoModule.class,
-        EstatusCompraModule.class
+        EstatusCompraModule.class,
+        PedidoModule.class,
 })
 
 public class ModularApplication {

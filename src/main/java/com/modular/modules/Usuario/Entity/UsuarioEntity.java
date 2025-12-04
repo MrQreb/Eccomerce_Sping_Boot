@@ -1,8 +1,8 @@
 package com.modular.modules.Usuario.Entity;
 
+import com.modular.modules.Carrito.Entity.CarritoEntity;
 import com.modular.modules.Direccion.Entity.DireccionEntity;
 import com.modular.modules.RolUsuario.Entity.RolUsuarioEntity;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "usuario") 
+@Table(name = "usuario")
 public class UsuarioEntity {
 
     @Id
@@ -30,10 +30,15 @@ public class UsuarioEntity {
     @Column(name = "contrasena")
     private String contrasena;
 
-    @ManyToOne()
-    @JoinColumn(name="rol_id")
+    @ManyToOne
+    @JoinColumn(name = "rol_id")
     private RolUsuarioEntity rol;
-    
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<DireccionEntity> direcciones = new ArrayList<>();
+
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private CarritoEntity carrito;
 
     public Long getId() {
         return id;
@@ -83,20 +88,13 @@ public class UsuarioEntity {
         this.rol = rol;
     }
 
-
-
-    @OneToMany(mappedBy = "usuario", cascade = jakarta.persistence.CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<DireccionEntity> direcciones = new ArrayList<>();
-
     public List<DireccionEntity> getDirecciones() {
         return direcciones;
     }
 
-
     public void setDirecciones(List<DireccionEntity> direcciones) {
         this.direcciones = direcciones;
     }
-
 
     public void addDireccion(DireccionEntity direccion) {
         direcciones.add(direccion);
@@ -108,4 +106,11 @@ public class UsuarioEntity {
         direccion.setUsuario(null);
     }
 
+    public CarritoEntity getCarrito() {
+        return carrito;
+    }
+
+    public void setCarrito(CarritoEntity carrito) {
+        this.carrito = carrito;
+    }
 }
