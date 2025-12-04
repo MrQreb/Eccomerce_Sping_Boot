@@ -1,0 +1,135 @@
+create table HTE_movimiento_inventario
+(
+    cantidad_anadida integer,
+    rn_              integer  not null,
+    stock_anterior   integer,
+    stock_nuevo      integer,
+    id               bigint,
+    producto_id      bigint,
+    provedor_id      bigint,
+    hib_sess_id      char(36) not null,
+    primary key (rn_, hib_sess_id)
+);
+
+create table carrito
+(
+    id         integer
+        primary key,
+    usuario_id bigint not null
+);
+
+create table carrito_producto
+(
+    id          integer
+        primary key,
+    cantidad    integer not null,
+    carrito_id  bigint  not null,
+    producto_id bigint  not null
+);
+
+create table categoria
+(
+    id     integer
+        primary key,
+    nombre varchar(255)
+);
+
+create table direcciones
+(
+    id         integer
+        primary key,
+    direccion  varchar(255),
+    usuario_id bigint
+);
+
+create table estatus_compra
+(
+    id     integer
+        primary key,
+    nombre varchar(255)
+);
+
+create table movimiento_inventario
+(
+    id               bigint not null
+        primary key,
+    cantidad_anadida integer,
+    stock_anterior   integer,
+    stock_nuevo      integer,
+    producto_id      bigint not null,
+    provedor_id      bigint not null,
+    total_movimiento float
+);
+
+create table movimiento_inventario_seq
+(
+    next_val bigint
+);
+
+create table pedido
+(
+    id                integer
+        primary key,
+    fecha_creacion    timestamp not null,
+    carrito_id        bigint    not null,
+    estatus_compra_id bigint    not null,
+    tipo_pago_id      bigint    not null
+);
+
+create table producto
+(
+    id             integer
+        primary key,
+    descripcion    varchar(255),
+    esta_eliminado boolean,
+    minimo_stock   float,
+    nombre         varchar(255),
+    precio         float,
+    stock          float,
+    categoria_id   bigint
+);
+
+create table provedor
+(
+    id     integer
+        primary key,
+    nombre varchar(255)
+);
+
+create table rol_usuario
+(
+    id     integer
+        primary key,
+    nombre varchar(255)
+        unique
+);
+
+create table sqlite_master
+(
+    type     TEXT,
+    name     TEXT,
+    tbl_name TEXT,
+    rootpage INT,
+    sql      TEXT
+);
+
+create table tipo_pago
+(
+    id     integer
+        primary key,
+    nombre varchar(255)
+);
+
+create table usuario
+(
+    id         integer
+        primary key,
+    contrasena varchar(255),
+    correo     varchar(255)
+        unique,
+    nombre     varchar(255),
+    usuario    varchar(255),
+    rol_id     bigint
+);
+
+
