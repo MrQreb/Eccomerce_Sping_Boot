@@ -69,13 +69,7 @@ public class PedidoController {
 
         Long usuarioId = usuario.getId();
 
-        // Prefer a service method that returns only the user's pedidos.
-        // Ensure PedidoService has a method like: List<PedidoEntity> findByUsuarioId(Long usuarioId);
         List<PedidoEntity> pedidos = pedidoService.findByUsuarioId(usuarioId);
-
-        // If you want an admin view of all pedidos, use:
-        // List<PedidoEntity> pedidos = pedidoService.findAllPedidos();
-
         model.addAttribute("pedidos", pedidos);
         model.addAttribute("usuario", usuario);
         return "pedido/listar-pedidos";
