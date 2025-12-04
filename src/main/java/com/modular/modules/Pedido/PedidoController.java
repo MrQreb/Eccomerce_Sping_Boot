@@ -1,6 +1,5 @@
 package com.modular.modules.Pedido;
 
-import com.modular.modules.Carrito.Entity.CarritoEntity;
 import com.modular.modules.Pedido.Entity.PedidoEntity;
 import com.modular.modules.TipoPago.Entity.TipoPagoEntity;
 import com.modular.modules.TipoPago.TipoPagoService;

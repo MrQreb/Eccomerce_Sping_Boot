@@ -45,7 +45,7 @@ public class DireccionController {
         }
         direccion.setUsuario(u.get());
         direccionService.createDireccion(direccion);
-        return "redirect:/direcciones/mis-direcciones";
+        return "redirect:/usuario/home";
     }
 
     @GetMapping("/usuario/{id}")

@@ -27,6 +27,7 @@ public class ProductoService {
         newProducto.setPrecio( producto.getPrecio() );
         newProducto.setNombre( producto.getNombre() );
         newProducto.setDescripcion( producto.getDescripcion() );
+        newProducto.setStock( producto.getStock() );
         CategoriaEntity categoria = categoriaRepository.findById(categoriaId).orElseThrow(() -> new RuntimeException("Categoria no existe"));
         newProducto.setCategoria(categoria);
         productoRepository.save(newProducto);

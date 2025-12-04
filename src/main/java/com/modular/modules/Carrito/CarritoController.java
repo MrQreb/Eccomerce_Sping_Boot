@@ -50,7 +50,7 @@ public class CarritoController {
         //Checo que tenga id de la sesion
         if (usuarioId == null) {
             model.addAttribute("error", "Usuario no autenticado. Por favor, inicie sesión.");
-            return "usuario/login"; // Redirect to the login page if no user ID is found
+            return "usuario/login";
         }
 
         //Obtener productos en el carrito

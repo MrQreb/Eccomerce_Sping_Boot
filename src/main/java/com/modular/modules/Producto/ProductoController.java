@@ -58,7 +58,7 @@ public class ProductoController {
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
         List<CategoriaEntity> categorias = categoriaService.getCategorias();
 
-        model.addAttribute("producto", producto); // Ensure 'producto' is added to the model
+        model.addAttribute("producto", producto);
         model.addAttribute("categorias", categorias);
         return "producto/editar-producto-form";
     }

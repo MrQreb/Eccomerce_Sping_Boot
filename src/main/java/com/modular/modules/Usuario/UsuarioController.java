@@ -55,10 +55,10 @@ public class UsuarioController {
         try {
             usuarioService.createUsuarioAdmin(usuario);
             redirectAttributes.addFlashAttribute("exito", "¡Usuario registrado con éxito!");
-            return "redirect:/admin/home";
+            return "redirect:/usuario/admin/home";
         } catch (RuntimeException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
-            return "redirect:/usuario/admin";
+            return "redirect:/usuario/admin/home";
         }
     }
 
