@@ -35,7 +35,7 @@
                 <a class="nav-link" th:href="@{/usuario/home}">Dashboard</a>
                 <a class="nav-link active" aria-current="page" th:href="@{/producto/buscar}">Productos</a>a>
                 <a class="nav-link" th:href="@{/direccion/mis-direcciones}">Direcciones</a>
-                <a class="nav-link" th:href="@{/pedidos}">Pedidos</a>
+                <a class="nav-link" th:href="@{/pedido/listar}">Pedidos</a>
                 <a class="nav-link text-danger mt-2" th:href="@{/usuario/login}">Cerrar sesión</a>
             </nav>
 
@@ -43,21 +43,9 @@
 
         </aside>
 
-        <!-- Main content -->
         <main class="col-12 col-md-9 col-lg-10 p-4">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <div>
-                    <h2 class="mb-0">Buscar Productos</h2>
-                    <small class="text-muted">Resultados de la búsqueda</small>
-                </div>
-                <div>
-                    <a class="btn btn-outline-primary btn-sm" th:href="@{/producto/form}">Nuevo Producto</a>
-                </div>
-            </div>
-
-
-
         </main>
+
     </div>
 </div>
 
