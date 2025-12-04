@@ -2,6 +2,7 @@ package com.modular.modular;
 
 import com.modular.modules.Carrito.CarritoModule;
 import com.modular.modules.Direccion.DireccionModule;
+import com.modular.modules.EstatusCompra.EstatusCompraModule;
 import com.modular.modules.MovimientoInventario.MovimientoInventarioModule;
 import com.modular.modules.Producto.ProductoModule;
 import com.modular.modules.Provedor.ProvedorModule;
@@ -25,7 +26,8 @@ import com.modular.modules.Usuario.UsuarioModule;
         MovimientoInventarioModule.class,
         DireccionModule.class,
         CarritoModule.class,
-        TipoPagoModule.class
+        TipoPagoModule.class,
+        EstatusCompraModule.class
 })
 
 public class ModularApplication {
